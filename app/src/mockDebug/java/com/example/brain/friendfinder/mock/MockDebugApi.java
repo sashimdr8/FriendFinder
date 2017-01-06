@@ -36,7 +36,6 @@ public class MockDebugApi {
 
                 for (int i = 0; i < searchFriendsModel.getData().size(); i++) {
 
-                    String g = searchFriendsModel.getData().get(i).getGender();
 
                     filterFriends(i, address, gender, searchFriendsModel.getData().get(i).getAddress(),
                             searchFriendsModel.getData().get(i).getGender());
@@ -56,8 +55,10 @@ public class MockDebugApi {
 
     }
 
-    private void filterFriends(int position, String selectedAddress, String selectedGender,
+    private void filterFriends(int position,
+                               String selectedAddress, String selectedGender,
                                String address, String gender) {
+
         if (selectedAddress.equalsIgnoreCase("Any City")) {
             if (selectedGender.equalsIgnoreCase("Any Gender")) {
                 friends.add(searchFriendsModel.getData().get(position));
