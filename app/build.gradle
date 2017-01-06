@@ -40,8 +40,8 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-scalars:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
-
     mockDebugCompile 'com.squareup.retrofit2:retrofit-mock:2.1.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:25.1.0'
+    compile 'com.squareup:otto:1.3.5'
 }

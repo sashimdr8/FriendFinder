@@ -39,6 +39,8 @@ public class SearchFriendsPresenter implements SearchFriendsContract.Presenter {
 
     @Override
     public void stop() {
-
+        if(!friends.isEmpty()){
+            friends.clear();
+        }
     }
 }

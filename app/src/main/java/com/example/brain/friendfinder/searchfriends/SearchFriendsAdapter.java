@@ -21,6 +21,7 @@ import java.util.ArrayList;
 public class SearchFriendsAdapter extends RecyclerView.Adapter<SearchFriendsAdapter.MyViewHolder> {
     ArrayList<SearchFriendsModel.DataBean> friends;
     Context context;
+
     public SearchFriendsAdapter(Context context, ArrayList<SearchFriendsModel.DataBean> friends) {
         this.friends = friends;
         this.context = context;
@@ -28,8 +29,8 @@ public class SearchFriendsAdapter extends RecyclerView.Adapter<SearchFriendsAdap
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ListItemSearchFriendsBinding  binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                R.layout.list_item_search_friends,parent,false);
+        ListItemSearchFriendsBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                R.layout.list_item_search_friends, parent, false);
         return new MyViewHolder(binding);
     }
 
@@ -39,16 +40,19 @@ public class SearchFriendsAdapter extends RecyclerView.Adapter<SearchFriendsAdap
                 .thumbnail(0.5f)
                 .crossFade()
                 .into(holder.binding.imageView);
-        holder.binding.tvAddress.setText("Address : "+friends.get(position).getAddress());
-        holder.binding.tvGender.setText("Gender : "+friends.get(position).getGender());
+        if (friends.isEmpty() || friends == null) {
+            holder.binding.tvName.setText("No any result");
+        }
+        holder.binding.tvAddress.setText("Address : " + friends.get(position).getAddress());
+        holder.binding.tvGender.setText("Gender : " + friends.get(position).getGender());
         holder.binding.tvName.setText(friends.get(position).getName());
-        holder.binding.tvInterestedIn.setText("Interested In : "+friends.get(position).getInterestedIn());
+        holder.binding.tvInterestedIn.setText("Interested In : " + friends.get(position).getInterestedIn());
 
     }
 
     @Override
     public int getItemCount() {
-        return friends.size();
+        return (friends != null) ? friends.size() : 0;
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {

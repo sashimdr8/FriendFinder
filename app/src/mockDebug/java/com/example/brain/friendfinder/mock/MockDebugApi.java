@@ -16,23 +16,31 @@ import java.util.ArrayList;
 
 public class MockDebugApi {
     private Context context;
+    ArrayList<SearchFriendsModel.DataBean> friends;
+    SearchFriendsModel searchFriendsModel;
 
     public MockDebugApi(Context context) {
         this.context = context;
     }
 
-    public  ArrayList<SearchFriendsModel.DataBean> searchFriends(String address, String gender) {
-         ArrayList<SearchFriendsModel.DataBean> friends = new ArrayList<>();
+    public ArrayList<SearchFriendsModel.DataBean> searchFriends(String address, String gender) {
+        friends = new ArrayList<>();
 
         try {
             String successfulResponse = Utils.
                     getStringFromFile(context, "nearByFriends.json");
             Gson gson = new GsonBuilder().create();
-            SearchFriendsModel searchFriendsModel = gson.fromJson(successfulResponse, SearchFriendsModel.class);
+            searchFriendsModel = gson.fromJson(successfulResponse, SearchFriendsModel.class);
             String responseCode = searchFriendsModel.getMessage();
             if (responseCode.equalsIgnoreCase("Success")) {
+
                 for (int i = 0; i < searchFriendsModel.getData().size(); i++) {
-                    friends.add(searchFriendsModel.getData().get(i));
+
+                    String g = searchFriendsModel.getData().get(i).getGender();
+
+                    filterFriends(i, address, gender, searchFriendsModel.getData().get(i).getAddress(),
+                            searchFriendsModel.getData().get(i).getGender());
+
                 }
                 return friends;
             } else if (responseCode.equalsIgnoreCase("INVALID_REQUEST")) {
@@ -47,4 +55,29 @@ public class MockDebugApi {
         return friends;
 
     }
+
+    private void filterFriends(int position, String selectedAddress, String selectedGender,
+                               String address, String gender) {
+        if (selectedAddress.equalsIgnoreCase("Any City")) {
+            if (selectedGender.equalsIgnoreCase("Any Gender")) {
+                friends.add(searchFriendsModel.getData().get(position));
+            } else {
+                if (selectedGender.equalsIgnoreCase(gender)) {
+                    friends.add(searchFriendsModel.getData().get(position));
+                }
+            }
+        } else {
+            if (selectedAddress.equalsIgnoreCase(address)) {
+                if (selectedGender.equalsIgnoreCase("Any Gender")) {
+                    friends.add(searchFriendsModel.getData().get(position));
+                } else {
+                    if (selectedGender.equalsIgnoreCase(gender)) {
+                        friends.add(searchFriendsModel.getData().get(position));
+                    }
+                }
+            }
+        }
+
+    }
+
 }

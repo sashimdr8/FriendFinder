@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">FriendFinder</string>
+    <string-array name="array_address">
+        <item>Any City</item>
+        <item>Kathmandu</item>
+        <item>Bhaktapur</item>
+        <item>Lalitpur</item>
+        <item>Banepa</item>
+        <item>Thimi</item>
+        <item>Sankhu</item>
+        <item>Kritipur</item>
+    </string-array>
+    <string-array name="array_gender">
+        <item>Any Gender</item>
+        <item>Male</item>
+        <item>Female</item>
+
+    </string-array>
+
 </resources>
