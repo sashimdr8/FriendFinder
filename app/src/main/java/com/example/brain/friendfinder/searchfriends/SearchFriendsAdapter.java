@@ -36,10 +36,10 @@ public class SearchFriendsAdapter extends RecyclerView.Adapter<SearchFriendsAdap
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        Glide.with(context).load(friends.get(position).getImage())
+      /*  Glide.with(context).load(friends.get(position).getImage())
                 .thumbnail(0.5f)
                 .crossFade()
-                .into(holder.binding.imageView);
+                .into(holder.binding.imageView);*/
         if (friends.isEmpty() || friends == null) {
             holder.binding.tvName.setText("No any result");
         }

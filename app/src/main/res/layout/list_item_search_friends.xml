@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+    <variable
+        name="friends"
+        type="com.example.brain.friendfinder.searchfriends.SearchFriendsModel.DataBean"/>
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +21,8 @@
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
             android:layout_gravity="center"
-            app:srcCompat="@mipmap/ic_launcher" />
+            app:srcCompat="@mipmap/ic_launcher"
+            app:imageUrl="@{friends.image}"/>
 
 
 
