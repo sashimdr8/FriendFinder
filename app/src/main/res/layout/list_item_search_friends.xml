@@ -50,7 +50,7 @@
                 android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/padding_extra_small"
-                android:text="TextView"
+                android:text="@{friends.name}"
                 android:textStyle="bold" />
 
             <TextView
@@ -59,7 +59,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/padding_extra_small"
-                android:text="TextView" />
+                android:text="@{friends.address}"
+                />
 
             <TextView
                 android:id="@+id/tvGender"
@@ -67,7 +68,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/padding_extra_small"
-                android:text="TextView" />
+                android:text="@{friends.gender}"
+                />
 
             <TextView
                 android:id="@+id/tvInterestedIn"

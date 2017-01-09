@@ -1,6 +1,7 @@
 package com.example.brain.friendfinder.utils;
 
 import android.databinding.BindingAdapter;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -14,7 +15,7 @@ public class FriendsFinderBinding {
 
     @BindingAdapter("imageUrl")
     public static void setImageUrl(ImageView imageView, String imageUrl) {
-        if (!imageUrl.isEmpty())
+        if (!TextUtils.isEmpty(imageUrl))
             Glide.with(imageView.getContext()).load(imageUrl)
                     .into(imageView);
     }
