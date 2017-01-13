@@ -2,6 +2,8 @@ package com.example.brain.friendfinder.network;
 
 import com.example.brain.friendfinder.searchfriends.SearchFriendsModel;
 
+import java.util.ArrayList;
+
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.POST;
@@ -12,7 +14,7 @@ import retrofit2.http.POST;
 
 public interface Api {
 
-    @POST("searchFriends/")
-    Call<SearchFriendsModel> searchFriends(@Field("address") String address ,@Field("gender") String gender);
+    ArrayList<SearchFriendsModel.DataBean> searchFriends(String address, String gender);
+
 
 }
