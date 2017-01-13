@@ -7,6 +7,7 @@ import com.example.brain.friendfinder.data.local.FriendFinderLocalRepo;
 import com.example.brain.friendfinder.data.local.FriendFinderPref;
 import com.example.brain.friendfinder.data.remote.Api;
 import com.example.brain.friendfinder.data.remote.FriendFinderRemoteRepo;
+import com.example.brain.friendfinder.utils.Constants;
 import com.example.brain.friendfinder.utils.RxBus;
 import com.google.gson.Gson;
 /*
@@ -31,7 +32,7 @@ public final class FriendFinderModule {
     FriendFinderLocalRepo localRepo;
     FriendFinderPref prefs;
 
-    private final Context app;
+    //private final Context app;
 
     private   Api api;
 
@@ -39,20 +40,20 @@ public final class FriendFinderModule {
         return api;
     }
 
-    public FriendFinderModule(Context app) {
+   /* public FriendFinderModule(Context app) {
         this.app = app;
         this.prefs = new FriendFinderPref(app,gson());
         this.localRepo = new FriendFinderLocalRepo(prefs);
         this.remoteRepo = new FriendFinderRemoteRepo(api,gson());
     }
+*/
+//    public Context provideContext() {
+//        return app;
+//    }
 
-    public Context provideContext() {
-        return app;
-    }
-
-    public FriendFinderData provideData() {
-        return new FriendFinderData(localRepo,remoteRepo);
-    }
+//    public FriendFinderData provideData() {
+//        return new FriendFinderData(localRepo,remoteRepo);
+//    }
 
 
     public RxBus provideBus() {
@@ -65,17 +66,16 @@ public final class FriendFinderModule {
     }
 
 
-    public FriendFinderPref providePrefs(Gson gson) {
+  /*  public FriendFinderPref providePrefs(Gson gson) {
         return new FriendFinderPref(app, gson);
-    }
+    }*/
 
 
-    public Retrofit provideRetrofit(OkHttpClient client, Gson gson) {
+    public Retrofit provideRetrofit() {
         return new Retrofit.Builder()
-                .client(client)
-                .baseUrl(BuildConfig.BASE_URL)
+                .baseUrl(Constants.BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())//To convert primitive and boxed types
-                .addConverterFactory(GsonConverterFactory.create(gson))
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
     }

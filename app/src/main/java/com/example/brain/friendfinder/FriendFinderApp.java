@@ -9,7 +9,7 @@ import android.content.Context;
  */
 
 public class FriendFinderApp extends Application {
-    FriendFinderModule module;
+    public FriendFinderModule module;
 
 
 

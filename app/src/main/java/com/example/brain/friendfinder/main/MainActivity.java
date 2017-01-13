@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.brain.friendfinder.R;
+import com.example.brain.friendfinder.auth.register.RegisterActivity;
 import com.example.brain.friendfinder.databinding.ActivityMainBinding;
 import com.example.brain.friendfinder.searchfriends.SearchFriendsActivity;
 import com.example.brain.friendfinder.utils.Constants;
@@ -29,6 +30,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
                 selectedAddress = binding.spAddress.getSelectedItem().toString();
                 selectedGender = binding.spGender.getSelectedItem().toString();
                 presenter.startSearchFriends(selectedAddress, selectedGender);
+            }
+        });
+        binding.btSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
             }
         });
 
