@@ -1,6 +1,5 @@
 package com.example.brain.friendfinder.main;
 
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +9,7 @@ import android.view.View;
 import com.example.brain.friendfinder.R;
 import com.example.brain.friendfinder.databinding.ActivityMainBinding;
 import com.example.brain.friendfinder.searchfriends.SearchFriendsActivity;
-import com.example.brain.friendfinder.searchfriends.SearchFriendsAdapter;
 import com.example.brain.friendfinder.utils.Constants;
-import com.example.brain.friendfinder.utils.DataBus;
 
 public class MainActivity extends AppCompatActivity implements MainContract.View {
     private ActivityMainBinding binding;
