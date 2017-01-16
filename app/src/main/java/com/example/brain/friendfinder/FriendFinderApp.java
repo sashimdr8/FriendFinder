@@ -9,21 +9,11 @@ import android.content.Context;
  */
 
 public class FriendFinderApp extends Application {
-    public FriendFinderModule module;
 
 
-
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        this.module = new FriendFinderModule(this.getApplicationContext());
-
-
-    }
 
     public static FriendFinderModule component(Context context) {
-        return ((FriendFinderApp) context.getApplicationContext()).module;
+        return  new FriendFinderModule(context);
     }
 
 

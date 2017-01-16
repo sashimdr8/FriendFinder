@@ -30,30 +30,21 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public final class FriendFinderModule {
     FriendFinderRemoteRepo remoteRepo;
     FriendFinderLocalRepo localRepo;
-    FriendFinderPref prefs;
+    private final Context app;
 
-    //private final Context app;
-
-    private   Api api;
-
-    public  Api api(){
-        return api;
+    public Api api() {
+        return provideRetrofit().create(Api.class);
     }
 
-   /* public FriendFinderModule(Context app) {
+    public FriendFinderModule(Context app) {
         this.app = app;
-        this.prefs = new FriendFinderPref(app,gson());
-        this.localRepo = new FriendFinderLocalRepo(prefs);
-        this.remoteRepo = new FriendFinderRemoteRepo(api,gson());
+        this.localRepo = new FriendFinderLocalRepo(providePrefs(gson()));
+        this.remoteRepo = new FriendFinderRemoteRepo(api(), gson());
     }
-*/
-//    public Context provideContext() {
-//        return app;
-//    }
 
-//    public FriendFinderData provideData() {
-//        return new FriendFinderData(localRepo,remoteRepo);
-//    }
+    public FriendFinderData provideData() {
+        return new FriendFinderData(localRepo, remoteRepo);
+    }
 
 
     public RxBus provideBus() {
@@ -66,9 +57,9 @@ public final class FriendFinderModule {
     }
 
 
-  /*  public FriendFinderPref providePrefs(Gson gson) {
+    public FriendFinderPref providePrefs(Gson gson) {
         return new FriendFinderPref(app, gson);
-    }*/
+    }
 
 
     public Retrofit provideRetrofit() {
@@ -79,17 +70,6 @@ public final class FriendFinderModule {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
     }
-
-
-    public FriendFinderLocalRepo provideLocalRepo(FriendFinderPref prefs) {
-        return new FriendFinderLocalRepo(prefs);
-    }
-
-
-    public FriendFinderRemoteRepo provideRemoteRepo(Api api, Gson gson) {
-        return new FriendFinderRemoteRepo(api, gson);
-    }
-
 
 
 }

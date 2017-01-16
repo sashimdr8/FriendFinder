@@ -1,6 +1,8 @@
 package com.example.brain.friendfinder.data.remote;
 
+import com.example.brain.friendfinder.FriendFinderModule;
 import com.example.brain.friendfinder.data.model.Auth;
+import com.example.brain.friendfinder.data.model.AuthResponse;
 import com.google.gson.Gson;
 
 import okhttp3.ResponseBody;
@@ -20,7 +22,7 @@ public class FriendFinderRemoteRepo {
 
     }
 
-    public Single<ResponseBody> signUp(String username, String password) {
+    public Single<AuthResponse> signUp(String username, String password) {
         return api.signUp(username,password);
     }
 }
