@@ -5,13 +5,16 @@ package com.example.brain.friendfinder.data.model;
  */
 
 public class AuthResponse {
+
     /**
      * code : 200
-     * message : Sign Up Successful
+     * message : Sign Up Failed
+     * token :
      */
 
     private int code;
     private String message;
+    private String token;
 
     public int getCode() {
         return code;
@@ -27,5 +30,13 @@ public class AuthResponse {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

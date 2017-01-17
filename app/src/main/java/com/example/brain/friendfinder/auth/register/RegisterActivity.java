@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     @Override
     public void showSignUpSuccess(AuthResponse authResponse) {
 
-        Utils.showToast(this, authResponse.getMessage());
+        Utils.showToast(this, authResponse.getToken());
 
     }
 }
