@@ -1,11 +1,11 @@
 package com.example.brain.friendfinder.data;
 
 import com.example.brain.friendfinder.data.local.FriendFinderLocalRepo;
-import com.example.brain.friendfinder.data.model.Auth;
+import com.example.brain.friendfinder.data.model.AuthResponse;
+import com.example.brain.friendfinder.data.model.User;
 import com.example.brain.friendfinder.data.remote.FriendFinderRemoteRepo;
 
 
-import okhttp3.ResponseBody;
 import rx.Single;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -24,15 +24,23 @@ public class FriendFinderData {
     }
 
 
-  /*  public Single<Auth> signUp(String username, String password) {
+    public Single<AuthResponse> signUp(String username, String password) {
 
         return remoteRepo.signUp(username, password)
-                .doOnSuccess(new Action1<ResponseBody>() {
+                .doOnSuccess(new Action1<AuthResponse>() {
                     @Override
-                    public void call(ResponseBody auth) {
-                      //  localRepo.cacheAuthData(auth);
+                    public void call(AuthResponse auth) {
+                        //  localRepo.cacheAuthData(auth);
                     }
                 }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
-    }*/
+    }
+
+    public void cacheAuthResult(User user) {
+        localRepo.cacheAuthData(user);
+    }
+
+    public User getuser(){
+        return localRepo.getUser();
+    }
 }
