@@ -7,4 +7,5 @@ package com.example.brain.friendfinder.utils;
 public class Constants {
     public static String ADDRESS = "Address";
     public static String GENDER = "Gender";
+    public static String BASE_URL = "https://friendfinder-neutronsudarshan.c9users.io/";
 }
