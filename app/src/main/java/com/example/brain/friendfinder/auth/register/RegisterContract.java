@@ -20,8 +20,8 @@ public interface RegisterContract {
 
     interface  View extends BaseView<Presenter>{
 
-        void showRegisterError(String message);
+        void showSignUpError(String message);
 
-        void showSignUpSuccess(AuthResponse auth);
+        void showSignUpSuccess(String email);
     }
 }

@@ -9,6 +9,8 @@
     <string name="username">Username</string>
     <string name="write_a_message">Write a Message ...</string>
     <string name="send">Send</string>
+    <string name="login">Log In</string>
+    <string name="auth_failed">auth failed</string>
     <string-array name="array_address">
         <item>Any City</item>
         <item>Kathmandu</item>

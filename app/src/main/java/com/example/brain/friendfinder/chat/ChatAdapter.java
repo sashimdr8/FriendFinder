@@ -9,7 +9,9 @@ import android.widget.BaseAdapter;
 
 import com.example.brain.friendfinder.R;
 import com.example.brain.friendfinder.data.model.MessageModel;
+import com.example.brain.friendfinder.data.model.User;
 import com.example.brain.friendfinder.databinding.ListItemChatMessagesBinding;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
@@ -22,7 +24,6 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public ChatAdapter() {
         this.messages = new ArrayList<>();
-
     }
 
     @Override
@@ -36,6 +37,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ChatHolder chatHolder = (ChatHolder) holder;
         chatHolder.binding.tvMessage.setText(messages.get(position).getMessage());
+
     }
 
     @Override

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/itembackground"
+        android:padding="@dimen/padding_small">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/login"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textStyle="bold"
+            android:textColor="@color/blue"/>
+
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="@string/username"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:background="@drawable/edit_text_background"
+            android:id="@+id/etUserName" />
+
+
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:layout_marginLeft="@dimen/activity_vertical_margin"
+            android:layout_marginRight="@dimen/activity_vertical_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:background="@drawable/edit_text_background"
+            android:id="@+id/etPassword" />
+
+
+
+        <Button
+            android:text="@string/login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:layout_margin="@dimen/activity_vertical_margin"
+            android:background="@drawable/button_blue_selector"
+            android:id="@+id/btLogin" />
+    </LinearLayout>
+
+</layout>

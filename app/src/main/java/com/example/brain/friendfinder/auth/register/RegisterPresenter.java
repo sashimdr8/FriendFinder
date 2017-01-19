@@ -1,12 +1,20 @@
 package com.example.brain.friendfinder.auth.register;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.brain.friendfinder.FriendFinderApp;
 import com.example.brain.friendfinder.FriendFinderModule;
 import com.example.brain.friendfinder.data.model.Auth;
 import com.example.brain.friendfinder.data.model.AuthResponse;
+import com.example.brain.friendfinder.data.model.User;
 import com.example.brain.friendfinder.data.remote.Api;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import okhttp3.ResponseBody;
 import rx.Scheduler;
@@ -22,6 +30,8 @@ import rx.schedulers.Schedulers;
 public class RegisterPresenter implements RegisterContract.Presenter {
     private RegisterContract.View view;
     FriendFinderModule module;
+    private FirebaseAuth mAuth;
+
 
     public RegisterPresenter(FriendFinderModule module, RegisterContract.View view) {
         this.view = view;
@@ -30,8 +40,27 @@ public class RegisterPresenter implements RegisterContract.Presenter {
 
     }
 
+    public void signUp(String username, String password) {
+        mAuth = FirebaseAuth.getInstance();
+        mAuth.createUserWithEmailAndPassword(username, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            FirebaseUser firebaseUser = task.getResult().getUser();
+                            String email = firebaseUser.getEmail();
+                            User user= new User(firebaseUser.getUid(),firebaseUser.getEmail(),firebaseUser.getDisplayName()
+                            );
+                            module.provideData().cacheAuthResult(user);
+                            view.showSignUpSuccess(email);
+                        } else {
+                            view.showSignUpError(String.valueOf(task.getException()));
+                        }
+                    }
+                });
 
-    @Override
+    }
+  /*  @Override
     public void signUp(String username, String password) {
         module.provideData().signUp(username, password)
                 .subscribeOn(Schedulers.io())
@@ -50,7 +79,7 @@ public class RegisterPresenter implements RegisterContract.Presenter {
                         });
 
     }
-
+*/
     @Override
     public void start() {
 

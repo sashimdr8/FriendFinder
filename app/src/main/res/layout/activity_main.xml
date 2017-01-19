@@ -110,5 +110,14 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             />
+        <Button
+            android:text="Login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="61dp"
+            android:id="@+id/btlogin"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            />
     </RelativeLayout>
 </layout>

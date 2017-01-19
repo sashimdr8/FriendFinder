@@ -2,6 +2,9 @@ package com.example.brain.friendfinder.chat;
 
 import android.util.Log;
 
+import com.example.brain.friendfinder.FriendFinderModule;
+import com.example.brain.friendfinder.data.model.User;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -14,11 +17,13 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ChatPresenter implements ChatContract.Presenter {
     private ChatContract.View view;
+    FriendFinderModule module;
     DatabaseReference myRef;
 
-    public ChatPresenter(ChatContract.View view) {
+    public ChatPresenter(FriendFinderModule module,ChatContract.View view) {
         this.view = view;
         this.view.setPresenter(this);
+        this.module = module;
 
     }
 
@@ -52,7 +57,8 @@ public class ChatPresenter implements ChatContract.Presenter {
 
     @Override
     public void sendMessage(String message) {
-        myRef.setValue(message);
+        User user = module.provideData().getuser();
+        myRef.setValue(user.getEmail()+" : "+message);
 
 
     }

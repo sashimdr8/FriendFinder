@@ -61,16 +61,15 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         return false;
     }
 
+
     @Override
-    public void showRegisterError(String message) {
-        Utils.showToast(this, message);
+    public void showSignUpError(String message) {
+        Utils.showToast(this,message);
 
     }
 
     @Override
-    public void showSignUpSuccess(AuthResponse authResponse) {
-
-        Utils.showToast(this, authResponse.getToken());
-
+    public void showSignUpSuccess(String email) {
+        Utils.showToast(this,"Sign Up Successful \n "+email);
     }
 }

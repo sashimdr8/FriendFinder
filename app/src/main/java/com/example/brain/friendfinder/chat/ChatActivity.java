@@ -8,9 +8,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.brain.friendfinder.FriendFinderApp;
 import com.example.brain.friendfinder.R;
+import com.example.brain.friendfinder.data.model.User;
 import com.example.brain.friendfinder.databinding.ActivityChatBinding;
 import com.example.brain.friendfinder.utils.Utils;
+import com.google.firebase.auth.FirebaseUser;
 
 /**
  * Created by brain on 1/19/17.
@@ -27,7 +30,7 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.View
         super.onCreate(savedInstanceState);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat);
-        new ChatPresenter(this);
+        new ChatPresenter(FriendFinderApp.component(this),this);
         this.presenter.getInstance();
         binding.rvMessages.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         adapter = new ChatAdapter();

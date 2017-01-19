@@ -2,6 +2,7 @@ package com.example.brain.friendfinder.data;
 
 import com.example.brain.friendfinder.data.local.FriendFinderLocalRepo;
 import com.example.brain.friendfinder.data.model.AuthResponse;
+import com.example.brain.friendfinder.data.model.User;
 import com.example.brain.friendfinder.data.remote.FriendFinderRemoteRepo;
 
 
@@ -29,9 +30,17 @@ public class FriendFinderData {
                 .doOnSuccess(new Action1<AuthResponse>() {
                     @Override
                     public void call(AuthResponse auth) {
-                      //  localRepo.cacheAuthData(auth);
+                        //  localRepo.cacheAuthData(auth);
                     }
                 }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public void cacheAuthResult(User user) {
+        localRepo.cacheAuthData(user);
+    }
+
+    public User getuser(){
+        return localRepo.getUser();
     }
 }
