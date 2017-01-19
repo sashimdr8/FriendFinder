@@ -101,5 +101,14 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
              />
+        <Button
+            android:text="Chat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="61dp"
+            android:id="@+id/btChat"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            />
     </RelativeLayout>
 </layout>

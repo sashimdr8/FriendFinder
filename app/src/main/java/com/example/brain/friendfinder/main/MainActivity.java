@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.example.brain.friendfinder.R;
 import com.example.brain.friendfinder.auth.register.RegisterActivity;
+import com.example.brain.friendfinder.chat.ChatActivity;
 import com.example.brain.friendfinder.databinding.ActivityMainBinding;
 import com.example.brain.friendfinder.searchfriends.SearchFriendsActivity;
 import com.example.brain.friendfinder.utils.Constants;
@@ -36,6 +37,12 @@ public class MainActivity extends AppCompatActivity implements MainContract.View
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+            }
+        });
+        binding.btChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ChatActivity.class));
             }
         });
 
