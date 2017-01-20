@@ -31,7 +31,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
-        new RegisterPresenter(FriendFinderApp.component(RegisterActivity.this), this);
+        new RegisterPresenter(this,FriendFinderApp.component(RegisterActivity.this), this);
 
         presenter.setAuthStateListener();
         binding.btSignUp.setOnClickListener(new View.OnClickListener() {

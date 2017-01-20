@@ -23,7 +23,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        new LoginPresenter(FriendFinderApp.component(LoginActivity.this),this);
+        new LoginPresenter(this,FriendFinderApp.component(LoginActivity.this),this);
         binding.btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

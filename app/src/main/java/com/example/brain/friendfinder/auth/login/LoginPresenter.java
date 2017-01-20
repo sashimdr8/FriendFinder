@@ -1,5 +1,6 @@
 package com.example.brain.friendfinder.auth.login;
 
+import android.app.Activity;
 import android.content.Context;
 
 
@@ -21,12 +22,14 @@ public class LoginPresenter implements LoginContract.Presenter {
     LoginContract.View view;
     private FirebaseAuth auth;
     private FriendFinderModule module;
+    Activity activity;
 
 
-    public LoginPresenter(FriendFinderModule module, LoginContract.View view) {
+    public LoginPresenter(Activity activity, FriendFinderModule module, LoginContract.View view) {
         this.module = module;
         this.view = view;
         this.view.setPresenter(this);
+        this.activity = activity;
     }
 
     @Override
@@ -39,14 +42,14 @@ public class LoginPresenter implements LoginContract.Presenter {
     public void login(String email, String password) {
         auth = FirebaseAuth.getInstance();
         auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = task.getResult().getUser();
                             String email = firebaseUser.getEmail();
-                            User user= new User(firebaseUser.getUid(),firebaseUser.getEmail(),firebaseUser.getDisplayName()
-                                    );
+                            User user = new User(firebaseUser.getUid(), firebaseUser.getEmail(), firebaseUser.getDisplayName()
+                            );
                             module.provideData().cacheAuthResult(user);
                             view.showLoginSuccess(email);
                         } else {
