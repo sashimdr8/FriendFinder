@@ -3,6 +3,7 @@ package com.example.brain.friendfinder.mock;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.example.brain.friendfinder.network.Api;
 import com.example.brain.friendfinder.searchfriends.SearchFriendsModel;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
  * Created by brain on 1/5/17.
  */
 
-public class MockDebugApi {
+public class MockDebugApi implements Api{
     private Context context;
     ArrayList<SearchFriendsModel.DataBean> friends;
     SearchFriendsModel searchFriendsModel;

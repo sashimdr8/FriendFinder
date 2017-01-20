@@ -30,6 +30,7 @@ import rx.schedulers.Schedulers;
 public class RegisterPresenter implements RegisterContract.Presenter {
     private RegisterContract.View view;
     FriendFinderModule module;
+    private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseAuth mAuth;
 
 
@@ -37,11 +38,13 @@ public class RegisterPresenter implements RegisterContract.Presenter {
         this.view = view;
         this.view.setPresenter(this);
         this.module = module;
+        mAuth = FirebaseAuth.getInstance();
+
 
     }
 
+
     public void signUp(String username, String password) {
-        mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -49,9 +52,9 @@ public class RegisterPresenter implements RegisterContract.Presenter {
                         if (task.isSuccessful()) {
                             FirebaseUser firebaseUser = task.getResult().getUser();
                             String email = firebaseUser.getEmail();
-                            User user= new User(firebaseUser.getUid(),firebaseUser.getEmail(),firebaseUser.getDisplayName()
+                          /*  User user= new User(firebaseUser.getUid(),firebaseUser.getEmail(),firebaseUser.getDisplayName()
                             );
-                            module.provideData().cacheAuthResult(user);
+                            module.provideData().cacheAuthResult(user);*/
                             view.showSignUpSuccess(email);
                         } else {
                             view.showSignUpError(String.valueOf(task.getException()));
@@ -60,28 +63,54 @@ public class RegisterPresenter implements RegisterContract.Presenter {
                 });
 
     }
-  /*  @Override
-    public void signUp(String username, String password) {
-        module.provideData().signUp(username, password)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<AuthResponse>() {
-                               @Override
-                               public void call(AuthResponse auth) {
-                                   view.showSignUpSuccess(auth);
-                               }
-                           }
-                        , new Action1<Throwable>() {
-                            @Override
-                            public void call(Throwable throwable) {
-                                view.showRegisterError(throwable.getMessage());
-                            }
-                        });
 
+    @Override
+    public void setAuthStateListener() {
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if (user != null) {
+                    // User is signed in
+                    Log.d("mero", "onAuthStateChanged:signed_in:" + user.getUid());
+                } else {
+                    // User is signed out
+                    Log.d("mero", "onAuthStateChanged:signed_out");
+                }
+                // ...
+            }
+        };
     }
-*/
+
+    @Override
+    public void onStop() {
+        if (mAuthListener != null) {
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
+
+    /*  @Override
+      public void signUp(String username, String password) {
+          module.provideData().signUp(username, password)
+                  .subscribeOn(Schedulers.io())
+                  .observeOn(AndroidSchedulers.mainThread())
+                  .subscribe(new Action1<AuthResponse>() {
+                                 @Override
+                                 public void call(AuthResponse auth) {
+                                     view.showSignUpSuccess(auth);
+                                 }
+                             }
+                          , new Action1<Throwable>() {
+                              @Override
+                              public void call(Throwable throwable) {
+                                  view.showRegisterError(throwable.getMessage());
+                              }
+                          });
+
+      }
+  */
     @Override
     public void start() {
-
+        mAuth.addAuthStateListener(mAuthListener);
     }
 }

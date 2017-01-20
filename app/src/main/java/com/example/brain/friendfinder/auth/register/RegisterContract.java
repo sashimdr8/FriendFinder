@@ -16,6 +16,9 @@ public interface RegisterContract {
     interface Presenter extends BasePresenter{
 
         void signUp(String username, String password);
+
+        void setAuthStateListener();
+        void  onStop();
     }
 
     interface  View extends BaseView<Presenter>{

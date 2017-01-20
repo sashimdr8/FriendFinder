@@ -32,6 +32,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
         new RegisterPresenter(FriendFinderApp.component(RegisterActivity.this), this);
+
+        presenter.setAuthStateListener();
         binding.btSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,6 +51,18 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
         });
 
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.start();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        presenter.onStop();
     }
 
     @Override
