@@ -15,12 +15,6 @@ public class MainPresenter implements MainContract.Presenter {
 
 
     @Override
-    public void startSearchFriends(String address, String gender) {
-        view.startSearchFriendsActivity(address,gender);
-
-    }
-
-    @Override
     public void stop() {
 
     }

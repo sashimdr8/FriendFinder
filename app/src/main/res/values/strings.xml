@@ -11,6 +11,8 @@
     <string name="send">Send</string>
     <string name="login">Log In</string>
     <string name="auth_failed">auth failed</string>
+    <string name="drawer_open">drawer opened</string>
+    <string name="drawer_close">drawer closed</string>
     <string-array name="array_address">
         <item>Any City</item>
         <item>Kathmandu</item>
@@ -25,6 +27,12 @@
         <item>Any Gender</item>
         <item>Male</item>
         <item>Female</item>
+
+    </string-array>
+    <string-array name="drawer_title_list">
+        <item>My Profile</item>
+        <item>Search Friends</item>
+        <item>Sign Out</item>
 
     </string-array>
 

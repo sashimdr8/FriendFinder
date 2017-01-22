@@ -1,15 +1,19 @@
 package com.example.brain.friendfinder.auth.login;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 
 import com.example.brain.friendfinder.FriendFinderApp;
+import com.example.brain.friendfinder.FriendFinderModule;
 import com.example.brain.friendfinder.R;
 import com.example.brain.friendfinder.databinding.ActivityLoginBinding;
+import com.example.brain.friendfinder.main.MainActivity;
 import com.example.brain.friendfinder.utils.Utils;
 
 /**
@@ -20,12 +24,16 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
     LoginContract.Presenter presenter;
     ActivityLoginBinding binding;
     ProgressDialog dialog;
-
+    FriendFinderModule module;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        new LoginPresenter(this, FriendFinderApp.component(LoginActivity.this), this);
+        module = FriendFinderApp.component(LoginActivity.this);
+        new LoginPresenter(this, module, this);
+        if(!TextUtils.isEmpty(module.provideData().getuser().getUserId())){
+            startActivity(new Intent(this,MainActivity.class));
+        }
         binding.btLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements LoginContract.Vi
 
     @Override
     public void showLoginSuccess(String email) {
+        startActivity(new Intent(this, MainActivity.class));
         Utils.showToast(this, "Login Successful \n Welcome " + email);
         dialog.dismiss();
     }
