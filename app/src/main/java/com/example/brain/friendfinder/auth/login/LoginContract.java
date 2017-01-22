@@ -19,5 +19,8 @@ public interface LoginContract {
         void showLoginSuccess(String email);
 
         void showLoginError(String error);
+
+        void showLoginProgress();
+
     }
 }

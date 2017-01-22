@@ -39,6 +39,7 @@ public class ChatActivity extends AppCompatActivity implements ChatContract.View
             @Override
             public void onClick(View view) {
                 presenter.sendMessage(binding.etMessage.getText().toString());
+                binding.etMessage.setText("");
                 Utils.hideKeyPad(binding.getRoot());
             }
         });

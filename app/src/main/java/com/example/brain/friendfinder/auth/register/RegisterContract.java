@@ -26,5 +26,8 @@ public interface RegisterContract {
         void showSignUpError(String message);
 
         void showSignUpSuccess(String email);
+
+        void showSignUpProgress();
+
     }
 }

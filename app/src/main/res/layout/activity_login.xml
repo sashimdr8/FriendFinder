@@ -53,10 +53,6 @@
             android:background="@drawable/button_blue_selector"
             android:id="@+id/btLogin" />
     </LinearLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true
-        "/>
+
 </RelativeLayout>
 </layout>

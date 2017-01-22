@@ -1,5 +1,6 @@
 package com.example.brain.friendfinder.auth.register;
 
+import android.app.ProgressDialog;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -25,13 +26,14 @@ import okhttp3.ResponseBody;
 public class RegisterActivity extends AppCompatActivity implements RegisterContract.View {
     private RegisterContract.Presenter presenter;
     private ActivityRegisterBinding binding;
+    ProgressDialog dialog;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register);
-        new RegisterPresenter(this,FriendFinderApp.component(RegisterActivity.this), this);
+        new RegisterPresenter(this, FriendFinderApp.component(RegisterActivity.this), this);
 
         presenter.setAuthStateListener();
         binding.btSignUp.setOnClickListener(new View.OnClickListener() {
@@ -42,9 +44,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
                 String confirmPassword = binding.etConfirmPassword.getText().toString();
                 if (Validator.isValidPassword(password, confirmPassword) && !TextUtils.isEmpty(username))
                     presenter.signUp(username, password);
-                else if (!Validator.isValidPassword(password,confirmPassword))
+                else if (!Validator.isValidPassword(password, confirmPassword))
                     binding.etPassword.setError(getString(R.string.invalid_password));
-                else  if(TextUtils.isEmpty(username))
+                else if (TextUtils.isEmpty(username))
                     binding.etUserName.setError(getString(R.string.invalid_username));
 
             }
@@ -78,12 +80,22 @@ public class RegisterActivity extends AppCompatActivity implements RegisterContr
 
     @Override
     public void showSignUpError(String message) {
-        Utils.showToast(this,message);
+        Utils.showToast(this, message);
+        dialog.dismiss();
 
     }
 
     @Override
     public void showSignUpSuccess(String email) {
-        Utils.showToast(this,"Sign Up Successful \n "+email);
+        Utils.showToast(this, "Sign Up Successful \n " + email);
+        dialog.dismiss();
+    }
+
+    @Override
+    public void showSignUpProgress() {
+        dialog = new ProgressDialog(RegisterActivity.this);
+        dialog.setTitle("Signing Up");
+        dialog.setMessage("Please wait till the process completes..");
+        dialog.show();
     }
 }

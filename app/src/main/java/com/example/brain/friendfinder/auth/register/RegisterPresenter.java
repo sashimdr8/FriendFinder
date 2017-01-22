@@ -47,6 +47,7 @@ public class RegisterPresenter implements RegisterContract.Presenter,OnCompleteL
 
 
     public void signUp(String username, String password) {
+        view.showSignUpProgress();
         mAuth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(activity,this);
 

@@ -20,7 +20,7 @@ public class ChatPresenter implements ChatContract.Presenter {
     FriendFinderModule module;
     DatabaseReference myRef;
 
-    public ChatPresenter(FriendFinderModule module,ChatContract.View view) {
+    public ChatPresenter(FriendFinderModule module, ChatContract.View view) {
         this.view = view;
         this.view.setPresenter(this);
         this.module = module;
@@ -58,7 +58,12 @@ public class ChatPresenter implements ChatContract.Presenter {
     @Override
     public void sendMessage(String message) {
         User user = module.provideData().getuser();
-        myRef.setValue(user.getEmail()+" : "+message);
+        if (user.getEmail() != null) {
+            myRef.setValue(user.getEmail() + " : " + message);
+        } else {
+            myRef.setValue("Global User" + " : " + message);
+
+        }
 
 
     }
